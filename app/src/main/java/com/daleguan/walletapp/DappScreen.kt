@@ -25,11 +25,20 @@ import io.metamask.androidsdk.Ethereum
 import io.metamask.androidsdk.EthereumMethod
 import io.metamask.androidsdk.EthereumRequest
 import io.metamask.androidsdk.SDKOptions
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.coroutineContext
+
+
+import java.net.URI
+import java.net.URL
+
+
 
 @Composable
 fun DappActionsScreen(
@@ -46,6 +55,8 @@ fun DappActionsScreen(
     val dappMetadata = DappMetadata("Droid Dapp", "https://droiddapp.com")
 
     val infuraAPIKey = ""
+
+    val myOpenseaApi = ""
 
     var ethereum = Ethereum(context = context, dappMetadata = dappMetadata, SDKOptions(infuraAPIKey))
 
@@ -152,18 +163,7 @@ fun DappActionsScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             DappButton(buttonText = stringResource(R.string.gettokenid)) {
-                val client = OkHttpClient()
-
-                val request = Request.Builder()
-                    .url("https://api.opensea.io/api/v2/chain/matic/contract/0x35CCb478bd5d71832C007a73C7f2c0925390Db95/nfts/1245")
-                    .get()
-                    .addHeader("accept", "application/json")
-                    .addHeader("x-api-key", "ce12cddb4f1d4b269d0a63e814da6383")
-                    .build()
-
-                val response = client.newCall(request).execute()
-
-                aResult = response.toString()
+                get(myOpenseaApi);
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -175,4 +175,27 @@ fun DappActionsScreen(
 }
 
 
+fun get(myOpenseaApi:String) {
+    val client = OkHttpClient()
+    val request = Request.Builder()
+        .url("https://api.opensea.io/api/v2/chain/matic/contract/0x35CCb478bd5d71832C007a73C7f2c0925390Db95/nfts/1245")
+        .get()
+        .addHeader("accept", "application/json")
+        .addHeader("x-api-key", myOpenseaApi)
+        .build()
 
+    val response = client.newCall(request).execute()
+
+    val responseBody = response.body!!.string()
+
+    //Response
+    println("Response Body: " + responseBody)
+
+    //we could use jackson if we got a JSON
+//    val mapperAll = ObjectMapper()
+//    val objData = mapperAll.readTree(responseBody)
+//
+//    objData.get("data").forEachIndexed { index, jsonNode ->
+//        println("$index $jsonNode")
+//    }
+}
