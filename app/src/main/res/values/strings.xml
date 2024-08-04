@@ -3,4 +3,5 @@
     <string name="sign">Sign a message</string>
     <string name="connect">Connect</string>
     <string name="getbalance">Get Balance</string>
+    <string name="gettokenid">Get Token ID</string>
 </resources>

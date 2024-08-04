@@ -17,11 +17,11 @@ class Wallet_mainpage @Inject constructor(
     }
 
 
-
     // wrapp function call other RPC-read only methods
     fun sendRequest(request: EthereumRequest, callback: ((Any?) -> Unit)?) {
         ethereum.sendRequest(request, callback)
     }
+
 
 
 }

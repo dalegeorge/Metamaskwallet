@@ -1,6 +1,5 @@
 package com.daleguan.walletapp
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,12 +17,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.daleguan.walletapp.ui.theme.WalletAppTheme
 import io.metamask.androidsdk.EthereumState
+import kotlin.coroutines.coroutineContext
 
 class MainActivity : ComponentActivity() {
 
     val ethereumviewmodel:Wallet_mainpage by viewModels()
 
     val ethereumState: EthereumState = EthereumState("","","0x3cAd439d7AD8c071Ae63A60f74b100e0fDCe1cAD")
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,12 +59,4 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WalletAppTheme {
-        Greeting("Android")
-    }
 }
