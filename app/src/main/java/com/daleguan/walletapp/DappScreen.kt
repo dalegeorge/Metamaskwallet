@@ -158,7 +158,7 @@ fun DappActionsScreen(
                     .url("https://api.opensea.io/api/v2/chain/matic/contract/0x35CCb478bd5d71832C007a73C7f2c0925390Db95/nfts/1245")
                     .get()
                     .addHeader("accept", "application/json")
-                    .addHeader("x-api-key", "")
+                    .addHeader("x-api-key", "ce12cddb4f1d4b269d0a63e814da6383")
                     .build()
 
                 val response = client.newCall(request).execute()
