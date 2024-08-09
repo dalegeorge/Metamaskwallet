@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
 
     val ethereumviewmodel:Wallet_mainpage by viewModels()
 
-    val ethereumState: EthereumState = EthereumState("","","0x3cAd439d7AD8c071Ae63A60f74b100e0fDCe1cAD")
+    val ethereumState: EthereumState = EthereumState("","","")
 
 
 
@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
                        onSwitchChain = { /*TODO*/ }) {
 
                    }
-                    Greeting("Android")
                 }
             }
         }

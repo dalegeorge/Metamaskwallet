@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -60,7 +64,7 @@ fun DappActionsScreen(
 
     var ethereum = Ethereum(context = context, dappMetadata = dappMetadata, SDKOptions(infuraAPIKey))
 
-    val address  = "0x3cAd439d7AD8c071Ae63A60f74b100e0fDCe1cAD"
+//    val address  = "0x3cAd439d7AD8c071Ae63A60f74b100e0fDCe1cAD"
 
     val TAG = "metamask wallet"
 
@@ -68,9 +72,18 @@ fun DappActionsScreen(
 
     var isAssetEmpty = false
 
-    var aResult = "Placeholder for asset"
+    var aResult by remember {
+        mutableStateOf("aResult Not Available!")
+    }
 
     val assetmsg = "Placeholder for asset "
+
+    var address by remember {
+        mutableStateOf("address place holder")
+    }
+    var ethState by remember {
+        mutableStateOf(ethereumState)
+    }
     Surface {
 //        AppTopBar(navController)
 
@@ -97,11 +110,11 @@ fun DappActionsScreen(
 //            )
             Text(text = "ChainId")
 
-            Spacer(modifier = Modifier.weight(1f))
+//            Spacer(modifier = Modifier.weight(1f))
 
-            Text(text = ethereumState.chainId)
+            Text(text = address)
 
-            Spacer(modifier = Modifier.weight(1f))
+//            Spacer(modifier = Modifier.weight(1f))
 
             Text(text = aResult)
 
@@ -132,6 +145,7 @@ fun DappActionsScreen(
                         }
                         is Result.Success.Item -> {
                             Log.d(TAG, "connection result: $result" )
+                            aResult = result.value
                         }
                         else -> {
                             Log.d(TAG,"Notiong happened and there is no connection")
@@ -152,6 +166,7 @@ fun DappActionsScreen(
                         }
                         is Result.Success.Item -> {
                             Log.d(TAG, "Connection result: $result" )
+                            address = result.value
 
                         }
                         else -> {
